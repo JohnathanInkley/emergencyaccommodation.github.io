@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newham Council: move our member out of Emergency Accommodation NOW!</title>
+    <title>Waltham Forest Council: House Abida and her family by Christmas!</title>
     <style>
         @font-face {
             font-family: "Trim Poster";
@@ -83,6 +83,9 @@
         button:hover:not(:disabled) {
             background-color: #45a049;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -90,18 +93,27 @@
         <img src="https://londonrentersunion.org/wp-content/uploads/2018/05/lru-logo-from-eps.png" alt="London Renters Union Logo">
     </header>
     <main>
-        <h1>Newham Council: move our member out of Emergency Accommodation NOW!</h1>
+        <h1>Waltham Forest Council: House Abida and her family by Christmas!</h1>
         <p>
-            Newham Council has kept our member in Emergency Accommodation for past the legal limit. 
-            They need to take action and house our member properly NOW! Enter your name and this 
-            tool will produce an email that will tell Newham Council to take action.
+            Waltham Forest Council has kept our member in a hotel for over six weeks, well past the legal limit. 
+            Cllr Ahsan Khan, Cabinet Member for Housing, needs to take action and house Abida NOW! Enter your name and this 
+            tool will produce an email that will tell Ahsan Khan to take action.
         </p>
-        <form id="email-form">
-            <label for="name" style="font-family: 'Circular Std medium', Arial, sans-serif;">Your Name:</label>
+	<form id="email-form">
+            <label style="font-family: 'Circular Std medium', Arial, sans-serif;">
+                <input type="checkbox" id="waltham-forest-checkbox">
+                I live in Waltham Forest
+            </label>
+
+            
             <input type="text" id="name" placeholder="Enter your name" required style="font-family: 'Circular Std medium', Arial, sans-serif;">
 
-            <input type="hidden" id="to-email" value="council@example.com">
-            <input type="hidden" id="bcc-email" value="bcc@example.com">
+            <div id="address-container" class="hidden" style="display: none; justify-content: center; width: 100%;">
+                <input type="text" id="address" placeholder="Enter your address" required style="font-family: 'Circular Std medium', Arial, sans-serif; padding: 10px; margin: 10px 0; width: 100%; font-size: 1em;">
+            </div>
+
+            
+            
 
             <button type="submit" id="submit-button" disabled style="font-family: 'Circular Std medium', Arial, sans-serif;">Send Email</button>
         </form>
@@ -110,7 +122,20 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const nameInput = document.getElementById('name');
+            const addressContainer = document.getElementById('address-container');
+            const addressInput = document.getElementById('address');
             const submitButton = document.getElementById('submit-button');
+            const checkbox = document.getElementById('waltham-forest-checkbox');
+
+            // Show address field when checkbox is checked
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    addressContainer.style.display = 'flex';
+                } else {
+                    addressContainer.style.display = 'none';
+                    addressInput.value = '';
+                }
+            });
 
             // Enable submit button when name is entered
             nameInput.addEventListener('input', () => {
@@ -122,11 +147,11 @@
                 event.preventDefault();
 
                 const name = nameInput.value.trim();
-                const toEmail = document.getElementById('to-email').value.trim();
-                const bccEmail = document.getElementById('bcc-email').value.trim();
-
-                // Fetch email body from the local text file
+                const address = addressInput.value.trim();
+                const toEmail = 'cllr.ahsan.khan@walthamforest.gov.uk';
+                const ccEmail = 'cllr.grace.williams@walthamforest.gov.uk,newham-leytonstone@londonrentersunion.org';
                 let emailBody = '';
+
                 try {
                     const response = await fetch('email_body.txt');
                     emailBody = await response.text();
@@ -135,13 +160,25 @@
                     return;
                 }
 
-                // Append user's name to the email body
-                emailBody += `\n\n${name}`;
+                // Replace placeholders based on checkbox
+                if (checkbox.checked) {
+                    emailBody = emailBody.replace(/PLACEHOLDER_1/g, "a resident of Waltham Forest and a member of the London Renters Union");
+                    emailBody = emailBody.replace(/PLACEHOLDER_2/g, "my neighbour and fellow member of the London Renters Union");
+                } else {
+                    emailBody = emailBody.replace(/PLACEHOLDER_1/g, "a member of the London Renters Union");
+                    emailBody = emailBody.replace(/PLACEHOLDER_2/g, "my fellow member of the London Renters Union");
+                }
+
+                // Append user's name and address to the email body
+                emailBody += `\n${name}`;
+                if (address) {
+                    emailBody += `\n${address}`;
+                }
 
                 // Create mailto link
                 const mailtoLink = `mailto:${encodeURIComponent(toEmail)}?` +
-                    `bcc=${encodeURIComponent(bccEmail)}&` +
-                    `subject=${encodeURIComponent('Newham Council: move our member out of Emergency Accommodation NOW!')}&` +
+                    `cc=${encodeURIComponent(ccEmail)}&` +
+                    `subject=${encodeURIComponent('House Abida and her Family by Christmas!')}&` +
                     `body=${encodeURIComponent(emailBody)}`;
 
                 // Open the mailto link
