@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waltham Forest Council: House Abida and her family by Christmas!</title>
+    <title>Sovereign Network Group: Rehouse Geraldine NOW!</title>
     <style>
         @font-face {
             font-family: "Trim Poster";
@@ -93,28 +93,16 @@
         <img src="https://londonrentersunion.org/wp-content/uploads/2018/05/lru-logo-from-eps.png" alt="London Renters Union Logo">
     </header>
     <main>
-        <h1>Waltham Forest Council: House Abida and her family by Christmas!</h1>
+        <h1>Sovereign Network Group: Rehouse Geraldine NOW!</h1>
         <p>
-            Waltham Forest Council has kept our member in a hotel for over six weeks, well past the legal limit. 
-            Cllr Ahsan Khan, Cabinet Member for Housing, needs to take action and house Abida NOW! Enter your name and this 
-            tool will produce an email that will tell Ahsan Khan to take action.
-        </p>
-	<form id="email-form">
-            <label style="font-family: 'Circular Std medium', Arial, sans-serif;">
-                <input type="checkbox" id="waltham-forest-checkbox">
-                I live in Waltham Forest
-            </label>
-
-            
+        	Geraldine has been living in a house with a severe mouse, rat and maggot infestation,
+		with damp and mould for more than 6 months. A pest expert said her house was unsafe to
+		live in, but her landlord Sovereign Network Group have ignored her and their own experts.
+		Tell Sovereign Network Group they need to meet with Geraldine NOW! 
+	</p>
+	<form id="email-form">            
             <input type="text" id="name" placeholder="Enter your name" required style="font-family: 'Circular Std medium', Arial, sans-serif;">
-
-            <div id="address-container" class="hidden" style="display: none; justify-content: center; width: 100%;">
-                <input type="text" id="address" placeholder="Enter your address" style="font-family: 'Circular Std medium', Arial, sans-serif; padding: 10px; margin: 10px 0; width: 100%; font-size: 1em;">
-            </div>
-
-            
-            
-
+      
             <button type="submit" id="submit-button" disabled style="font-family: 'Circular Std medium', Arial, sans-serif;">Send Email</button>
         </form>
     </main>
@@ -122,22 +110,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const nameInput = document.getElementById('name');
-            const addressContainer = document.getElementById('address-container');
-            const addressInput = document.getElementById('address');
             const submitButton = document.getElementById('submit-button');
-            const checkbox = document.getElementById('waltham-forest-checkbox');
-
-            // Show address field when checkbox is checked
-            checkbox.addEventListener('change', () => {
-                if (checkbox.checked) {
-                    addressContainer.style.display = 'flex';
-		    addressInput.setAttribute('required', 'true');
-                } else {
-                    addressContainer.style.display = 'none';
-                    addressInput.value = '';
-		    addressInput.removeAttribute('required');
-                }
-            });
 
             // Enable submit button when name is entered
             nameInput.addEventListener('input', () => {
@@ -149,8 +122,7 @@
                 event.preventDefault();
 
                 const name = nameInput.value.trim();
-                const address = addressInput.value.trim();
-                const toEmail = 'cllr.ahsan.khan@walthamforest.gov.uk';
+                const toEmail = 'sharon.jones@sng.org.uk,nsharp@sovereign.org.uk'; 
                 const ccEmail = 'newham-leytonstone@londonrentersunion.org';
                 let emailBody = '';
 
@@ -162,25 +134,14 @@
                     return;
                 }
 
-                // Replace placeholders based on checkbox
-                if (checkbox.checked) {
-                    emailBody = emailBody.replace(/PLACEHOLDER_1/g, "a resident of Waltham Forest and a member of the London Renters Union");
-                    emailBody = emailBody.replace(/PLACEHOLDER_2/g, "my neighbour and fellow member of the London Renters Union");
-                } else {
-                    emailBody = emailBody.replace(/PLACEHOLDER_1/g, "a member of the London Renters Union");
-                    emailBody = emailBody.replace(/PLACEHOLDER_2/g, "my fellow member of the London Renters Union");
-                }
 
                 // Append user's name and address to the email body
                 emailBody += `\n${name}`;
-                if (address) {
-                    emailBody += `\n${address}`;
-                }
 
                 // Create mailto link
                 const mailtoLink = `mailto:${encodeURIComponent(toEmail)}?` +
                     `cc=${encodeURIComponent(ccEmail)}&` +
-                    `subject=${encodeURIComponent('House Abida and her Family by Christmas!')}&` +
+                    `subject=${encodeURIComponent('Meet with Gerladine NOW!')}&` +
                     `body=${encodeURIComponent(emailBody)}`;
 
                 // Open the mailto link
