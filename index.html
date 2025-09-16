@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steve Moseley: Four ceiling collapses is enough - Rehouse Sanjay Now!</title>
+    <title>Newham Council: 17 months of severe overcrowding is too long - Rehouse Shahin Now!</title>
     <style>
         @font-face {
             font-family: "Trim Poster";
@@ -93,11 +93,11 @@
         <img src="https://londonrentersunion.org/wp-content/uploads/2018/05/lru-logo-from-eps.png" alt="London Renters Union Logo">
     </header>
     <main>
-        <h1>Steve Moseley: Four ceiling collapses is enough - Rehouse Sanjay Now!</h1>
+        <h1>Newham Council: 17 months of severe overcrowding is too long - Rehouse Shahin Now!</h1>
         <p>
-        	Sanjay and his family (including his children who are full time carers) suffered <a href="https://metro.co.uk/2025/06/18/dad-left-in-misery-ceiling-collapses-three-times-london-home-23387577/">four ceiling collapses, two and a half years of no electricity and 12 years of damp, mould and being ignored!</a>
-		L&Q directors promised to rehouse him into a two bedroom flat and to discuss compensation for the 12 years of misery. Within two weeks, they went back on their promises and failed him again!
-		We need to email the Executive Director with the legal resonsibility to make things right, Steve Moseley. Email him to make him act NOW!
+        	Shahin and his family have been in severely overcrowded accommodation for over 17 months, placed there by Newham Council. 
+			The Council themselves accepted they need to rehouse him in early Summer, and since repeatedly said "it will happen very soon" or "in the next two weeks".
+			But it needs to happen now! No more broken promises! Email Newham now to make them act NOW!
 		
 	</p>
 	<form id="email-form">            
@@ -122,7 +122,11 @@
                 event.preventDefault();
 
                 const name = nameInput.value.trim();
-                const toEmail = 'smoseley@lqgroup.org.uk'; 
+                const toEmails = [
+    				'Zulfiqar.Mulak@newham.gov.uk',
+    				'Kulbir.Channa@newham.gov.uk'
+  				];
+  				const toField = toEmails.map(e => encodeURIComponent(e.trim())).join(',');
                 const ccEmail = 'newham-leytonstone@londonrentersunion.org';
                 let emailBody = '';
 
@@ -139,9 +143,9 @@
                 emailBody += `\n${name}`;
 
                 // Create mailto link
-                const mailtoLink = `mailto:${encodeURIComponent(toEmail)}?` +
+                const mailtoLink = `mailto:${toField}?` +
                     `cc=${encodeURIComponent(ccEmail)}&` +
-                    `subject=${encodeURIComponent('Rehouse Sanjay NOW and make things right!')}&` +
+                    `subject=${encodeURIComponent('Rehouse Shahin and his family now!')}&` +
                     `body=${encodeURIComponent(emailBody)}`;
 
                 // Open the mailto link
